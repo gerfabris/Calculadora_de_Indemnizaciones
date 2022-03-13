@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Link Css-->
+    <link rel="stylesheet" href="../css/admin.css">
+    <!-- Title-->
+    <title>Login Administrador - Estudio Jurídico Fabris - Fernández Lafi & Asoc.</title>
+</head>
+<body>
+    <main>
+        <div class="contenedor__general">
+            <!-- Contenedor cajas posteriores de login y register-->
+            <div class="contenedor__posterior" id="contenedorPosterior">
+                <div class="contenedor__posterior-login" id="contenedorPosteriorLogin">
+                    <h3>¿Ya tienes cuenta?</h3>
+                    <p>Inicia sesión para entrar en la página</p>
+                    <button id="botonLogin">Iniciar sesión</button>
+                </div>
+                <div class="contenedor__posterior-register" id="contenedorPosteriorRegister">
+                    <h3>¿Aún no tienes cuenta?</h3>
+                    <p>Registrate para entrar en la página</p>
+                    <button id="botonRegister">Registrarse</button>
+                </div>                
+            </div>
+            <!-- Contenedor de formularios de login y register-->
+            <div class="contenedor__login-register" id="contenedorLoginRegister">
+                <!-- Login-->
+                <form action="" class="formulario__login" id="formulario__login" method="POST">
+                    <h2>Iniciar Sesión</h2>
+                    <input type="mail" id="emaillogin" placeholder="Correo electrónico">
+                    <input type="password"id="contrasenalogin" name="contrasenaLogin" placeholder="Contraseña">
+                    <button type="submit" id="btnLogin">Entrar</button>
+                </form>
+                <!-- Register-->
+                <form action="" class="formulario__register" id="formulario__register">
+                    <h2>Registrarse</h2>
+                    <input type="text" name="nombre" id="nombreRegister" placeholder="Nombre y Apellido">
+                    <input type="text" name="usuario" id="usuarioRegister" placeholder="Usuario">
+                    <input type="mail" id="emailRegister" placeholder="Correo electrónico">
+                    <input type="password" name="contrasenaRegister" id="contrasenaRegister" placeholder="Contraseña">
+                    <button type="submit" id="btnRegister">Registrarse</button>
+                </form>
+            </div>
+        </div>
+    </main>
+    <!-- Sweet Alert-->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>    
+    <!-- Scripts-->
+    <script type="text/javascript" src="../js/adminStyle.js"></script>
+    <script type="text/javascript" src="../js/mensajes.js"></script>    
+    <script type="text/javascript" src="../js/admin.js"></script>
+</body>
+</html>

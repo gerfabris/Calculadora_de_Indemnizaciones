@@ -1,0 +1,10 @@
+{
+    "usuario": [
+        {
+            "email": "admin@estudiojuridico" 
+        },
+        {
+            "contrasena": "admin1234"
+        }
+    ]
+}
