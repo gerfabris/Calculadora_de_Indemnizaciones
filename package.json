@@ -1,0 +1,19 @@
+{
+  "name": "calculadora",
+  "version": "1.0.0",
+  "description": "calculadora de indemnizaciones laborales, utilizando JS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gerfabris/Calculadora_de_Indemnizaciones.git"
+  },
+  "author": "German Fabris",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gerfabris/Calculadora_de_Indemnizaciones/issues"
+  },
+  "homepage": "https://github.com/gerfabris/Calculadora_de_Indemnizaciones#readme"
+}
