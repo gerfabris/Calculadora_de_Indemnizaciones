@@ -93,11 +93,11 @@
                     </div>   
                     <div class="formulario__contenedor" id="contenedorAntiguedad">
                         <label for="antiguedad" class="formulario__contenedor__label">Dinos la cantidad de años trabajados o período mayor a 3 meses</label>
-                        <input id="antiguedad" class="formulario__contenedor__input" type="number" name="antiguedad" placeholder="Escribe tu antigüedad" required><br>
+                        <input id="antiguedad" class="formulario__contenedor__input" type="number" min="1" name="antiguedad" placeholder="Escribe tu antigüedad" required><br>
                     </div>
                     <div class="formulario__contenedor" id="contenedorSalario">
                         <label for="salario" class="formulario__contenedor__label">Dinos el mejor sueldo bruto que hayas tenido dentro de los últimos 12 meses</label>
-                        <input id="salario" class="formulario__contenedor__input" type="number" name="salario" placeholder="Escribe tu salario" required><br>
+                        <input id="salario" class="formulario__contenedor__input" type="number" minlength="4" name="salario" placeholder="Escribe tu salario" required><br>
                     </div>
                     <div class="formulario__contenedor" id="contenedorPreaviso">
                         <label class="formulario__contenedor__label" for="preaviso">Dinos si hubo preaviso o no</label>
@@ -108,19 +108,19 @@
                     </div>
                     <div id="contenedorDiasTrabajados" class="formulario__contenedor">
                         <label for="diasTrabajados" class="formulario__contenedor__label">Dinos cuantos días del mes trabajaste</label>
-                        <input id="diasTrabajados" class="formulario__contenedor__input" type="number" name="diasTrabajados" placeholder="Escribe la cantidad de días que has trabajado en el mes" required><br>
+                        <input id="diasTrabajados" class="formulario__contenedor__input" type="number" min="1" max="31" name="diasTrabajados" placeholder="Escribe la cantidad de días que has trabajado en el mes" required><br>
                     </div>    
                     <div class="formulario__contenedor" id="contenedorSalarioConvenio">
                         <label for="salarioConvenio" class="formulario__contenedor__label">Dinos el salario que te corresponde según el Convenio Colectivo correspondiente</label>
-                        <input id="salarioConvenio" class="formulario__contenedor__input" type="number" name="salarioConvenio" placeholder="Escribe el salario que te corresponde según tu Convenio Colectivoo" required><br>
+                        <input id="salarioConvenio" class="formulario__contenedor__input" type="number" minlength="4" name="salarioConvenio" placeholder="Escribe el salario que te corresponde según tu Convenio Colectivoo" required><br>
                     </div>    
                     <div class="formulario__contenedor" id="contenedorCantidadMesesNoAbonados">
                         <label for="cantidadMesesNoAbonados" class="formulario__contenedor__label">Dinos la cantidad de meses trabajados y no abonados</label>
-                        <input id="cantidadMesesNoAbonados" class="formulario__contenedor__input" type="number" name="cantidadMesesNoAbonados" placeholder="Escribe cantidad de meses trabajados y no abonados" required><br>
+                        <input id="cantidadMesesNoAbonados" class="formulario__contenedor__input" type="number" min="0" name="cantidadMesesNoAbonados" placeholder="Escribe cantidad de meses trabajados y no abonados" required><br>
                     </div>   
                     <div class="formulario__contenedor" id="contenedorSueldoAnualComplementario">
                         <label for="sueldoAnualComplementario" class="formulario__contenedor__label">Dinos cuantos días del año has trabajado desde el último pago del SAC</label>
-                        <input id="sueldoAnualComplementario" class="formulario__contenedor__input" type="number" name="sueldoAnualComplementario" placeholder="Escribe cantidad de días" required><br>
+                        <input id="sueldoAnualComplementario" class="formulario__contenedor__input" type="number" min="0" max="365" name="sueldoAnualComplementario" placeholder="Escribe cantidad de días" required><br>
                     </div>                                                          
                     <div class="formulario__contenedor" id="contenedorBotonSubmitCalcular">
                         <button id="submitTrabajoNoRegistrado" type="submit" class="formulario__contenedor__boton">Calcular</button>
