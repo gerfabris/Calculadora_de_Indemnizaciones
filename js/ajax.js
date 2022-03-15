@@ -10,11 +10,6 @@ restringirBaseDatos = ()  =>{
     obtenerSectionMostrarBaseDatos.style.display = "none";
     obtenerSectionSinLogin.style.display = "flex";
 }
-/* validarLocalStorage = () =>{
-
-    localStorageUsuario != null && localStorageContrasena != null ? mostrarBaseDatos() : restringirBaseDatos();
-};
-validarLocalStorage(); */
 let url;
 simularUrl = () =>{
     localStorageUsuario != null && localStorageContrasena != null ? url = "../json/simulaUsuarioValido.json" : url = "../json/simulaUsuarioNull.json";

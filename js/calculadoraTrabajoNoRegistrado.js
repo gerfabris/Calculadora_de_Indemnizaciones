@@ -1,5 +1,3 @@
-//Creación de clases para cálculos de indemnizaciones
-//Creación clase datos del usuario
 class Usuario{
     //Constructor Usuario
     constructor(nombre,apellido,email,trabajo){
@@ -12,10 +10,7 @@ class Usuario{
         this.id = datosUsuariosTrabajoNoRegistrado.length + 1;
     }
 };
-//Cierra clase datos personales del usuario
-//Clase despidos en caso de Trabajo NO registrado
 class DespidoTrabajoNoRegistrado{
-    //Constructor Despidos trabajo no registrado o en negro
     constructor (antiguedad,salario,preaviso,diasTrabajados,salarioConvenio,mesesNoAbonados,diasTrabajadosAnual){
         this.antiguedad = antiguedad;
         this.salario = salario;
@@ -25,13 +20,11 @@ class DespidoTrabajoNoRegistrado{
         this.mesesNoAbonados = mesesNoAbonados;
         this.diasTrabajadosAnual = diasTrabajadosAnual;
     };
-    //Métodos Despidos trabajo no registrado o en negro
-    // Método para determinar indemnización art. 245
     calcDosCuarentayCinco(){
         this.dosCuarentayCinco = this.salario * this.antiguedad;
+        this.dosCuarentayCinco = this.dosCuarentayCinco.toFixed(2);
         return this.dosCuarentayCinco;
     };
-    // Método para determinar antiguedad para cálculo del total de preaviso     
     calcParaAntiguedadParaPreaviso(){
         this.antiguedadParaPreaviso = 0;
         if (this.antiguedad < 5){
@@ -41,23 +34,22 @@ class DespidoTrabajoNoRegistrado{
         }else if(this.preaviso == "no"){
             this.antiguedadParaPreaviso = 0;
         };
+        this.antiguedadParaPreaviso = this.antiguedadParaPreaviso.toFixed(2);
         return this.antiguedadParaPreaviso;
     };
-    // Método para determinar indemnización por falta de preaviso  
     calcParaPreaviso(){
         this.preavisoTotal = this.antiguedadParaPreaviso * this.salario;
+        this.preavisoTotal = this.preavisoTotal.toFixed(2);
         return this.preavisoTotal;
     };
-    // Método para determinar indemnización integración mes de despido
     calcIntegracion(){
         this.integracion = (30 - this.diasTrabajados) * (this.salario/30);
+        this.integracion = this.integracion.toFixed(2);
         return this.integracion;
     };
-    // Método para determinar indemnización total por despido registrado o en blanco
     calcTotalRubrosIndemnizatorios(){
         return this.totalRubrosIndemnizatorios = this.dosCuarentayCinco + this.integracion;
     };
-    // Método para determinar antiguedad Tope por prescripción 
     calcParaAntiguedadTope(){
         if (this.antiguedad > 2) {
             this.antiguedadTope = 2;
@@ -66,28 +58,29 @@ class DespidoTrabajoNoRegistrado{
         };
         return this.antiguedadTope;
     };
-    // Método para cálculo de diferencias salariales
     calcDiferenciasSalariales(){
         this.diferenciasSalariales = (this.salarioConvenio - this.salario) * this.antiguedadTope * 12;
+        this.diferenciasSalariales = this.diferenciasSalariales.toFixed(2);
         return this.diferenciasSalariales;
     };
-    // Método para cálculo de meses no abonados
     calcMesesNoAbonados(){
         this.mesesNoAbonadosTotal = this.mesesNoAbonados * this.salarioConvenio;
+        this.mesesNoAbonadosTotal = this.mesesNoAbonadosTotal.toFixed(2);
         return this.mesesNoAbonadosTotal;
     };
-    //Método para cálculo de sueldo anual complementario
     calcSueldoAnualComplementario(){
         this.sueldoAnualComplementario = ((this.salario/2) /180) * this.diasTrabajadosAnual;
+        this.sueldoAnualComplementario = this.sueldoAnualComplementario.toFixed(2)
         return this.sueldoAnualComplementario;
     };
-    // Método para determinar total de indemnización por trabajo no registrado
     calcTotalRubrosNoRetenibles(){
         this.totalRubrosNoRetenibles = this.sueldoAnualComplementario + this.diferenciasSalariales + this.mesesNoAbonadosTotal;
+        this.totalRubrosNoRetenibles = this.totalRubrosNoRetenibles.toFixed(2);
         return this.totalRubrosNoRetenibles;
     };
     calcTotalTrabajoNoRegistrado(){
         this.totalTrabajoNoRegistrado = this.totalRubrosIndemnizatorios + this.totalRubrosNoRetenibles;
+        this.totalTrabajoNoRegistrado = this.totalTrabajoNoRegistrado.toFixed(2);
         return this.totalTrabajoNoRegistrado;
     };
     id(){
@@ -97,54 +90,36 @@ class DespidoTrabajoNoRegistrado{
         this.totalMostrar = this.totalTrabajoNoRegistrado;
     };
 };
-//Cierra clase desódps em caso de trabajo NO registrado
-// Constantes Array para simular creación base de datos con los datos que ingrese el usuario
 const despidosTrabajoNoRegistrado  = [];
 const datosUsuariosTrabajoNoRegistrado = [];
 const datosUsuarioYDespidoTrabajoNoRegistrado = [];
 const desestructuradoUnidos = [];
-//Obtención de elemento submit para ejecutar el código
 const obtenerFormularioTrabajoNoRegistrado = document.getElementById("formularioTrabajoNoRegistrado");
 const obtenerInputs = document.querySelectorAll("#formularioTrabajoNoRegistrado input");
 const obtenerSubmitTrabajoNoRegistrado = document.getElementById("submitTrabajoNoRegistrado");
-//Abre variable para validar formulario
 const validarCalculadoraTrabajoNoRegistrado = obtenerSubmitTrabajoNoRegistrado.addEventListener("click", (e) =>{
     e.preventDefault();
-    //valida envío de formulario vacío
     let validar = false;
     let paraValidar = [];    
     obtenerInputs.forEach((input) => {
-        if(input.value <= 0){
-            validar = false;
-        }else{
-            validar = true
-            paraValidar.push(validar)
-        };
-//fin if validación contenido usuario
-    });//fin for each
-    //revisa lenght y si ambos son iguales ejecuta la función de la calculadora 
+        input.value.length < 1 ? validar = false : validar = true + paraValidar.push(validar)
+    });
     paraValidar.length == obtenerInputs.length ? ejecutarCalculadoraTrabajoNoRegistrado() : mensajeError(); //operador ternario
-}); //fin submit addEventListener
-//variable para ejecución de la calculadora
+});
 const ejecutarCalculadoraTrabajoNoRegistrado = () => {
-    //Funcion para obtención de elementos del html a utilizar en las clases en archivo funciones.js
     obtenerByID ();
-    //Obtención de los datos personales
     const nuevoUsuarioTrabajoNoRegistrado = new Usuario(
         obtenerNombres,
         obtenerApellidos,
         obtenerEmail,
         obtenerTrabajo,
     );
-    //Crea id usuario
     nuevoUsuarioTrabajoNoRegistrado.idUsuario();
-    //Función Push a base datos del usuario en localStorage
     let agregarUsuariosTrabajoNoRegistrados = () =>{
         datosUsuariosTrabajoNoRegistrado.push(nuevoUsuarioTrabajoNoRegistrado); 
         localStorage.setItem("UsuarioTrabajoNoRegistrado", JSON.stringify(datosUsuariosTrabajoNoRegistrado));
     };   
     agregarUsuariosTrabajoNoRegistrados();    
-    // Creación nuevo objeto despidoRegistrado
     const nuevoDespidoTrabajoNoRegistrado = new DespidoTrabajoNoRegistrado(
         obtenerAntiguedad,
         obtenerSalario,
@@ -154,7 +129,6 @@ const ejecutarCalculadoraTrabajoNoRegistrado = () => {
         obtenerCantidadMesesNoAbonados,
         obtenerSueldoAnualComplementario,
     );    
-    // Funciones para cálculos
     nuevoDespidoTrabajoNoRegistrado.calcDosCuarentayCinco();
     nuevoDespidoTrabajoNoRegistrado.calcIntegracion();
     nuevoDespidoTrabajoNoRegistrado.calcParaAntiguedadParaPreaviso();
@@ -168,13 +142,11 @@ const ejecutarCalculadoraTrabajoNoRegistrado = () => {
     nuevoDespidoTrabajoNoRegistrado.calcTotalTrabajoNoRegistrado();
     nuevoDespidoTrabajoNoRegistrado.id();
     nuevoDespidoTrabajoNoRegistrado.calcTotalMostrar();
-    //Función para Push al array base datos de los despidos por trabajo registrado o en blanco en localStorage
     let agregarDespidosNoRegistrados = () =>{
         despidosTrabajoNoRegistrado.push(nuevoDespidoTrabajoNoRegistrado);
         localStorage.setItem("DespidosTrabajoNoRegistrado", JSON.stringify(despidosTrabajoNoRegistrado));
     };
     agregarDespidosNoRegistrados();    
-    //envío Formulario con prevención de refresh
     const formularioTrabajoNoRegistrado = document.getElementById("formularioTrabajoNoRegistrado");
     formularioTrabajoNoRegistrado.addEventListener("submit", (e) =>{
         e.preventDefault();
@@ -200,7 +172,6 @@ const ejecutarCalculadoraTrabajoNoRegistrado = () => {
         <p>En total, tu indemnización es de $ ${nuevoDespidoTrabajoNoRegistrado.totalMostrar}</p>`;
         obtenerSectionMostrarResultadoTrabajoNoRegistrado.appendChild(divResultadoTrabajoNoRegistrado);   
     };
-    //Mostrar Resultado
     crearResultadoTrabajoNoRegistrado();
     const obtenerCalculadoraContenedorRespuesta = document.getElementById("contenedorRespuesta");
     //Para hacer que al mostrar el resultado creado baje hasta el mismo    

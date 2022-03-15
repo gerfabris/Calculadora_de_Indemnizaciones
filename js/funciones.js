@@ -32,12 +32,11 @@ mensajeError = () =>{
         }
     });
 };
-// función para obtener parse de localStorage
+// función para obtener parse de localStorage | prueba en basedatos.js linea 10
 jsonParse = (a,arrayStringly) => {
     a = JSON.parse(localStorage.getItem(arrayStringly));
     return a
 };
-//prueba en basedatos.js linea 10
 //FILTROS
 filtrarMayorTotalMostrar = (obtener,arrayParaFiltrar,monto,contenedorResultado) => {
     filtrarMayorMonto = obtener.addEventListener("click", () =>{
@@ -76,7 +75,6 @@ filtrarMenorTotalMostrar = (obtener,arrayParaFiltrar,monto,contenedorResultado) 
 volverMostrarTodos = (obtener,arrayParaFiltrar,contenedorResultado) => {
     todos = obtener.addEventListener("click", () =>{
         contenedorResultado.innerHTML = "";
-        //agregar en html
         for (let objeto of arrayParaFiltrar){
             let objetoAñadir = document.createElement("div");
             objetoAñadir.innerHTML = `<ul><li>El ID es: ${objeto.id} y su monto total es: $ ${objeto.totalMostrar}</li></ul>`;
@@ -94,7 +92,6 @@ filtrarMayorAntiguedad = (obtener,arrayParaFiltrar,monto,contenedorResultado) =>
             }
         });
     contenedorResultado.innerHTML = "";
-    //agregar en html
     for (let filtradoMayor of filtroMayorAntiguedad){
         let filtroAñadir = document.createElement("div");
         filtroAñadir.innerHTML = `<ul><li>El ID es: ${filtradoMayor.id} y su antigüedad es: ${filtradoMayor.antiguedad}</li></ul>`;

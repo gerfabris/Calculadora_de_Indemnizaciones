@@ -85,13 +85,7 @@ const validarCalculadoraRenuncia = obtenerSubmitRenuncias.addEventListener("clic
     let validar = false
     let paraValidar = []    
     obtenerInputs.forEach((input) => {
-        if(input.value <= 0){
-            validar = false;
-        }else{
-            validar = true
-            paraValidar.push(validar)
-        }
-//fin if validación contenido usuario
+        input.value.length < 1 ? validar = false : validar = true + paraValidar.push(validar)
     });//fin for each
     //revisa lenght y si ambos son iguales ejecuta la función de la calculadora 
     paraValidar.length == obtenerInputs.length ? ejecutarCalculadoraRenuncias() : mensajeError(); //operador ternario

@@ -92,7 +92,7 @@
                 </div>   
                 <div class="formulario__contenedor" id="contenedorSueldoAnualComplementario">
                     <label for="sueldoAnualComplementario" class="formulario__contenedor__label">Dinos cuantos días del año has trabajado desde el último pago del SAC</label>
-                    <input id="sueldoAnualComplementario" class="formulario__contenedor__input" type="number" name="sueldoAnualComplementario" placeholder="Escribe cantidad de días" required><br>
+                    <input id="sueldoAnualComplementario" class="formulario__contenedor__input" type="number" max="365" name="sueldoAnualComplementario" placeholder="Escribe cantidad de días" required><br>
                 </div> 
                 <div class="formulario__contenedor" id="contenedorSalario">
                     <label for="salario" class="formulario__contenedor__label">Dinos el mejor sueldo bruto que hayas tenido dentro de los últimos 12 meses</label>
@@ -104,7 +104,7 @@
                 </div>
                 <div id="contenedorDiasTrabajados" class="formulario__contenedor">
                     <label for="diasTrabajados" class="formulario__contenedor__label">Dinos cuantos días del mes trabajaste</label>
-                    <input id="diasTrabajados" class="formulario__contenedor__input" type="number" name="diasTrabajados" placeholder="Escribe la cantidad de días que has trabajado en el mes" required><br>
+                    <input id="diasTrabajados" class="formulario__contenedor__input" type="number" min="0" max="31" name="diasTrabajados" placeholder="Escribe la cantidad de días que has trabajado en el mes" required><br>
                 </div>    
                 <div class="formulario__contenedor" id="contenedorBotonSubmitCalcular">
                     <button id="submitRenuncias" type="submit" class="formulario__contenedor__boton">Calcular</button>
