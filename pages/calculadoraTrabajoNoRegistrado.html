@@ -62,73 +62,72 @@
             <h1 class="h3 calculadora__sectionTitulos__h1">Calculadora de indemnizaciones Laborales en caso de Trabajo No Registrado o "en negro"</h1>
             <h2 class="h4 calculadora__sectionTitulos__h2">Ponemos a disposición nuestras Calculadoras Online</h2>   
         </section>
-        <section>
-            <section id="seccionformularioTrabajoNoRegistrado" class="calculadora__sectionFormulario">
-                <form id="formularioTrabajoNoRegistrado" class="formulario" action="" method="post">
-                    <div id="tituloFormulario" class="formulario__contenedor">
-                        <h3 class="formulario__contenedor__h3" id="tituloFormulario">
-                            Coloca tus datos personales
-                        </h3>
-                    </div>
-                    <div class="formulario__contenedor" id="contenedorNombres">
-                        <label for="nombre" class="formulario__contenedor__label">Nombres</label>
-                        <input id="nombres" class="formulario__contenedor__input" type="text" name="nombre" placeholder="Escribe tus nombres" required><br>
-                    </div>    
-                    <div class="formulario__contenedor" id="contenedorApellidos">
-                        <label for="apellidos" class="formulario__contenedor__label">Apellidos</label>
-                        <input id="apellidos" class="formulario__contenedor__input" type="text" name="apellidos" placeholder="Escribe tus apellidos" required><br>
-                    </div>                
-                    <div class="formulario__contenedor" id="contenedorEmail">
-                        <label for="email" name="replyto" class="formulario__contenedor__label">Email</label>
-                        <input id="email" class="formulario__contenedor__input" type="email" name="mail" placeholder="Ejemplo: ejfabrisfernándezlafi@gmail.com" required><br>
-                    </div>
-                    <div class="formulario__contenedor" id="contenedorTrabajo">
-                        <label for="trabajo" class="formulario__contenedor__label">Trabajo</label>
-                        <input id="trabajo" class="formulario__contenedor__input" type="text" name="trabajo" placeholder="Escribe de qué trabajas" required><br>
-                    </div>          
-                    <div class="formulario__contenedor" id="contenedorTituloFormulario">
-                        <h3 class="formulario__contenedor__h3" id="tituloFormulario">
-                            Ahora completa los siguientes datos para realizar el cálculo
-                        </h3>
-                    </div>   
-                    <div class="formulario__contenedor" id="contenedorAntiguedad">
-                        <label for="antiguedad" class="formulario__contenedor__label">Dinos la cantidad de años trabajados o período mayor a 3 meses</label>
-                        <input id="antiguedad" class="formulario__contenedor__input" type="number" min="1" name="antiguedad" placeholder="Escribe tu antigüedad" required><br>
-                    </div>
-                    <div class="formulario__contenedor" id="contenedorSalario">
-                        <label for="salario" class="formulario__contenedor__label">Dinos el mejor sueldo bruto que hayas tenido dentro de los últimos 12 meses</label>
-                        <input id="salario" class="formulario__contenedor__input" type="number" minlength="4" name="salario" placeholder="Escribe tu salario" required><br>
-                    </div>
-                    <div class="formulario__contenedor" id="contenedorPreaviso">
-                        <label class="formulario__contenedor__label" for="preaviso">Dinos si hubo preaviso o no</label>
-                        <select class="formulario__contenedor__input" name="preaviso" id="preaviso">
-                            <option value="si">Si hubo</option>
-                            <option value="no">No hubo</option>
-                        </select>
-                    </div>
-                    <div id="contenedorDiasTrabajados" class="formulario__contenedor">
-                        <label for="diasTrabajados" class="formulario__contenedor__label">Dinos cuantos días del mes trabajaste</label>
-                        <input id="diasTrabajados" class="formulario__contenedor__input" type="number" min="1" max="31" name="diasTrabajados" placeholder="Escribe la cantidad de días que has trabajado en el mes" required><br>
-                    </div>    
-                    <div class="formulario__contenedor" id="contenedorSalarioConvenio">
-                        <label for="salarioConvenio" class="formulario__contenedor__label">Dinos el salario que te corresponde según el Convenio Colectivo correspondiente</label>
-                        <input id="salarioConvenio" class="formulario__contenedor__input" type="number" minlength="4" name="salarioConvenio" placeholder="Escribe el salario que te corresponde según tu Convenio Colectivoo" required><br>
-                    </div>    
-                    <div class="formulario__contenedor" id="contenedorCantidadMesesNoAbonados">
-                        <label for="cantidadMesesNoAbonados" class="formulario__contenedor__label">Dinos la cantidad de meses trabajados y no abonados</label>
-                        <input id="cantidadMesesNoAbonados" class="formulario__contenedor__input" type="number" min="0" name="cantidadMesesNoAbonados" placeholder="Escribe cantidad de meses trabajados y no abonados" required><br>
-                    </div>   
-                    <div class="formulario__contenedor" id="contenedorSueldoAnualComplementario">
-                        <label for="sueldoAnualComplementario" class="formulario__contenedor__label">Dinos cuantos días del año has trabajado desde el último pago del SAC</label>
-                        <input id="sueldoAnualComplementario" class="formulario__contenedor__input" type="number" min="0" max="365" name="sueldoAnualComplementario" placeholder="Escribe cantidad de días" required><br>
-                    </div>                                                          
-                    <div class="formulario__contenedor" id="contenedorBotonSubmitCalcular">
-                        <button id="submitTrabajoNoRegistrado" type="submit" class="formulario__contenedor__boton">Calcular</button>
-                    </div>
-                </form>
-            </section>
-            <section id="mostrarResultadosFormularioTrabajoNoRegistrado" class="calculadora__sectionRespuesta">
-            </section>
+        <section id="seccionformularioTrabajoNoRegistrado" class="calculadora__sectionFormulario">
+            <form id="formularioTrabajoNoRegistrado" class="formulario" action="" method="post">
+                <div id="tituloFormulario" class="formulario__contenedor">
+                    <h3 class="formulario__contenedor__h3" id="tituloFormulario">
+                        Coloca tus datos personales
+                    </h3>
+                </div>
+                <div class="formulario__contenedor" id="contenedorNombres">
+                    <label for="nombre" class="formulario__contenedor__label">Nombres</label>
+                    <input id="nombres" class="formulario__contenedor__input" type="text" name="nombre" placeholder="Escribe tus nombres" required><br>
+                </div>    
+                <div class="formulario__contenedor" id="contenedorApellidos">
+                    <label for="apellidos" class="formulario__contenedor__label">Apellidos</label>
+                    <input id="apellidos" class="formulario__contenedor__input" type="text" name="apellidos" placeholder="Escribe tus apellidos" required><br>
+                </div>                
+                <div class="formulario__contenedor" id="contenedorEmail">
+                    <label for="email" name="replyto" class="formulario__contenedor__label">Email</label>
+                    <input id="email" class="formulario__contenedor__input" type="email" name="mail" placeholder="Ejemplo: ejfabrisfernándezlafi@gmail.com" required><br>
+                </div>
+                <div class="formulario__contenedor" id="contenedorTrabajo">
+                    <label for="trabajo" class="formulario__contenedor__label">Trabajo</label>
+                    <input id="trabajo" class="formulario__contenedor__input" type="text" name="trabajo" placeholder="Escribe de qué trabajas" required><br>
+                </div>          
+                <div class="formulario__contenedor" id="contenedorTituloFormulario">
+                    <h3 class="formulario__contenedor__h3" id="tituloFormulario">
+                        Ahora completa los siguientes datos para realizar el cálculo
+                    </h3>
+                </div>   
+                <div class="formulario__contenedor" id="contenedorAntiguedad">
+                    <label for="antiguedad" class="formulario__contenedor__label">Dinos la cantidad de años trabajados o período mayor a 3 meses</label>
+                    <input id="antiguedad" class="formulario__contenedor__input" type="number" min="1" name="antiguedad" placeholder="Escribe tu antigüedad" required><br>
+                </div>
+                <div class="formulario__contenedor" id="contenedorSalario">
+                    <label for="salario" class="formulario__contenedor__label">Dinos el mejor sueldo bruto que hayas tenido dentro de los últimos 12 meses</label>
+                    <input id="salario" class="formulario__contenedor__input" type="number" minlength="4" name="salario" placeholder="Escribe tu salario" required><br>
+                </div>
+                <div class="formulario__contenedor" id="contenedorPreaviso">
+                    <label class="formulario__contenedor__label" for="preaviso">Dinos si hubo preaviso o no</label>
+                    <select class="formulario__contenedor__input" name="preaviso" id="preaviso">
+                        <option value="si">Si hubo</option>
+                        <option value="no">No hubo</option>
+                    </select>
+                </div>
+                <div id="contenedorDiasTrabajados" class="formulario__contenedor">
+                    <label for="diasTrabajados" class="formulario__contenedor__label">Dinos cuantos días del mes trabajaste</label>
+                    <input id="diasTrabajados" class="formulario__contenedor__input" type="number" min="1" max="31" name="diasTrabajados" placeholder="Escribe la cantidad de días que has trabajado en el mes" required><br>
+                </div>    
+                <div class="formulario__contenedor" id="contenedorSalarioConvenio">
+                    <label for="salarioConvenio" class="formulario__contenedor__label">Dinos el salario que te corresponde según el Convenio Colectivo correspondiente</label>
+                    <input id="salarioConvenio" class="formulario__contenedor__input" type="number" minlength="4" name="salarioConvenio" placeholder="Escribe el salario que te corresponde según tu Convenio Colectivoo" required><br>
+                </div>    
+                <div class="formulario__contenedor" id="contenedorCantidadMesesNoAbonados">
+                    <label for="cantidadMesesNoAbonados" class="formulario__contenedor__label">Dinos la cantidad de meses trabajados y no abonados</label>
+                    <input id="cantidadMesesNoAbonados" class="formulario__contenedor__input" type="number" min="0" name="cantidadMesesNoAbonados" placeholder="Escribe cantidad de meses trabajados y no abonados" required><br>
+                </div>   
+                <div class="formulario__contenedor" id="contenedorSueldoAnualComplementario">
+                    <label for="sueldoAnualComplementario" class="formulario__contenedor__label">Dinos cuantos días del año has trabajado desde el último pago del SAC</label>
+                    <input id="sueldoAnualComplementario" class="formulario__contenedor__input" type="number" min="0" max="365" name="sueldoAnualComplementario" placeholder="Escribe cantidad de días" required><br>
+                </div>                                                          
+                <div class="formulario__contenedor" id="contenedorBotonSubmitCalcular">
+                    <button id="submitTrabajoNoRegistrado" type="submit" class="formulario__contenedor__boton">Calcular</button>
+                </div>
+            </form>
+        </section>
+        <section id="mostrarResultadosFormularioTrabajoNoRegistrado" class="calculadora__sectionRespuesta">
+        </section>
     </main>
     <footer>
         <!-- Abre footer principal-->
@@ -224,6 +223,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <!-- Scripts-->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script type="text/javascript" src="../js/mensajes.js"></script>  
     <script type="text/javascript" src="../js/funciones.js"></script>  
     <script type="text/javascript" src="../js/calculadoraTrabajoNoRegistrado.js"></script>
 </body>

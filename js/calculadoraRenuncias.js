@@ -26,7 +26,7 @@ class Renuncia{
     //Método para calcular sueldo anual complementario
     calcSueldoAnualComplementario(){
         this.sueldoAnualComplementario = ((this.salario/2) /180) * this.diasTrabajadosAnual;
-        this.sueldoAnualComplementario = this.sueldoAnualComplementario.toFixed(2);
+        this.sueldoAnualComplementario = +this.sueldoAnualComplementario.toFixed(2);
         return this.sueldoAnualComplementario;
     };
     //Método para calcular cantidad de días que le corresponden por vacaciones
@@ -46,19 +46,19 @@ class Renuncia{
     //Método para calcular rubro correspondiente a indemnización
     calcVacaciones(){
         this.vacaciones = this.cantidadDiasVacaciones*this.salario;
-        this.vacaciones = this.vacaciones.toFixed(2);
+        this.vacaciones = +this.vacaciones.toFixed(2);
         return this.vacaciones;
     };
     //Método para calcular rubro correspondiente a integración de días trabajados
     calcIntegracion(){
         this.integracion = (30 - this.diasTrabajados) * (this.salario/30);
-        this.integracion = this.integracion.toFixed(2);
+        this.integracion = +this.integracion.toFixed(2);
         return this.integracion;
     };
     //Método para calcular la totalidad de los rubros correspondientes en caso de renuncia
     calcTotalRenuncia(){
         this.totalRenuncia = this.integracion + this.vacaciones + this.sueldoAnualComplementario;
-        this.totalRenuncia = this.totalRenuncia.toFixed(2)
+        this.totalRenuncia = +this.totalRenuncia.toFixed(2)
         return this.totalRenuncia;
     };
     id(){
@@ -81,14 +81,37 @@ const obtenerSubmitRenuncias = document.getElementById("submitRenuncias");
 //Abre variable para verificar formulario
 const validarCalculadoraRenuncia = obtenerSubmitRenuncias.addEventListener("click", (e) =>{
     e.preventDefault();
+    //valida datos lógicos de cada input
+    let datosLogicos = false;
+    validarDatosLogicos = () =>{
+        sueldoAnualComplementario = document.getElementById("sueldoAnualComplementario");
+        salario = document.getElementById("salario");
+        antiguedad = document.getElementById("antiguedad");
+        diasTrabajados = document.getElementById("diasTrabajados");
+        validadoSueldoAnualComplementario = false;
+        validadoSalario = false;
+        validadoAntiguedad = false;
+        validadoDiasTrabajados = false;
+        sueldoAnualComplementario.value < 0 ? validadoSueldoAnualComplementario = false : validadoSueldoAnualComplementario = true;
+        sueldoAnualComplementario.value > 365 ? validadoSueldoAnualComplementario = false : validadoSueldoAnualComplementario = true;
+        salario.value.length < 4 ? validadoSalario = false : validadoSalario = true;
+        antiguedad.value < 1 ? validadoAntiguedad = false : validadoAntiguedad = true;
+        diasTrabajados.value < 0 ? validadoDiasTrabajados = false : validadoDiasTrabajados = true;
+        diasTrabajados.value > 31 ? validadoDiasTrabajados = false : validadoDiasTrabajados = true;
+        validadoSueldoAnualComplementario && validadoSalario && validadoAntiguedad && validadoDiasTrabajados ? datosLogicos = true : datosLogicos = false;
+    }
+    validarDatosLogicos();
     //valida envío de formulario vacío
-    let validar = false
-    let paraValidar = []    
-    obtenerInputs.forEach((input) => {
-        input.value.length < 1 ? validar = false : validar = true + paraValidar.push(validar)
-    });//fin for each
-    //revisa lenght y si ambos son iguales ejecuta la función de la calculadora 
-    paraValidar.length == obtenerInputs.length ? ejecutarCalculadoraRenuncias() : mensajeError(); //operador ternario
+    validarFormularioCompleto = () =>{
+        let validar = false
+        let paraValidar = []    
+        obtenerInputs.forEach((input) => {
+            input.value.length < 1 ? validar = false : validar = true + paraValidar.push(validar)
+        });//fin for each
+        //revisa lenght y si ambos son iguales ejecuta la función de la calculadora 
+        paraValidar.length == obtenerInputs.length ? ejecutarCalculadoraRenuncias() : mensajeError(); //operador ternario    
+    };
+    datosLogicos == true ? validarFormularioCompleto() : mensajeErrorDatosInvalidos();
 }); //fin submit addEventListener
 //variable para ejecución de la calculadora
 const ejecutarCalculadoraRenuncias = () => {
@@ -140,14 +163,15 @@ const ejecutarCalculadoraRenuncias = () => {
     const crearResultadoRenuncias = () => {
         obtenerSectionMostrarResultadoRenuncias.innerHTML = "";
         let divResultadoRenuncias =  document.createElement("div");
-        divResultadoRenuncias.id = ("contenedorRespuesta")
-        divResultadoRenuncias.classList = ("calculadora__contenedorRespuesta")
+        divResultadoRenuncias.id = ("contenedorRespuesta");
+        divResultadoRenuncias.classList = ("calculadora__contenedorRespuesta");
         divResultadoRenuncias.innerHTML = `<h3>Aquí tus resultados ${nuevoUsuarioRenuncia.nombre}</h3>
-        <ul><li>Corresponde que te abonen un total de $ ${nuevaRenuncia.totalRenuncia}</li>
+        <ul><li>Corresponde que te abonen un total de $ <b> ${nuevaRenuncia.totalRenuncia}</b>.</li>
         <li>La misma está compuesta por los siguientes rubros:</li>
-        <li>Vacaciones no gozadas: $ ${nuevaRenuncia.vacaciones}</li>
-        <li>Sueldo Anual Complementario: $ ${nuevaRenuncia.sueldoAnualComplementario}</li>
-        <li>Integración mes trabajado: $ ${nuevaRenuncia.integracion}</li></ul>`
+        <li>- Vacaciones no gozadas: $ ${nuevaRenuncia.vacaciones}.</li>
+        <li>- Sueldo Anual Complementario: $ ${nuevaRenuncia.sueldoAnualComplementario}.</li>
+        <li>- Integración mes trabajado: $ ${nuevaRenuncia.integracion}.</li></ul>
+        <button id="botonImprimir" class="boton__Imprimir">Imprimir</button>`;
         obtenerSectionMostrarResultadoRenuncias.appendChild(divResultadoRenuncias);
     };
     //Mostrar Resultado
@@ -157,6 +181,10 @@ const ejecutarCalculadoraRenuncias = () => {
     obtenerCalculadoraContenedorRespuesta.scrollIntoView();
     obtenerCalculadoraContenedorRespuesta.scrollIntoView(true);
     obtenerCalculadoraContenedorRespuesta.scrollIntoView({behavior: "smooth"});
+    const botonImprimir = document.getElementById("botonImprimir");
+    const imprimirDocumento = botonImprimir.addEventListener("click", (e) =>{
+        window.print(e);
+    });
     //utilización de spread para crear usuario con todos los datos
     unidos = {
         ...nuevaRenuncia,

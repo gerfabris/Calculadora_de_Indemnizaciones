@@ -230,12 +230,14 @@ header nav div div ul a:hover {
 }
 .calculadora__sectionRespuesta{
     display: flex;
+    width: 100%;
     justify-content: center;
     align-items: center;
     flex-direction: column;  
 }
 .calculadora__contenedorRespuesta{
     display: flex;
+    width: 95%;
     justify-content: center;
     align-items: center;
     flex-direction: column;  
@@ -260,9 +262,31 @@ header nav div div ul a:hover {
     list-style: none;
     text-align: start;
     color: #112535;
-    margin-top: .2em;
-    margin-bottom: .2em;
+    margin-top: .5em;
+    margin-bottom: .5em;
 }
+.contenedor__boton__Imprimir{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;  
+}
+.boton__Imprimir{
+    border-style: none;
+    border-radius: 2pt;
+    background-color: #cdb8e0;
+    color: #112535 ;
+    font-weight: bold;
+    padding: .5em;
+    margin-top: .5em;
+    margin-bottom: .5em;
+}
+.boton__Imprimir:hover{
+    background-color: #8a2be2;
+    color: #F6E8EA;
+    cursor: pointer;
+}    
 /* Cierra calculadoras MF */
 /*base datos*/
 .main__baseDatos{
@@ -395,6 +419,9 @@ footer div a:hover{
     -webkit-transform: rotate(360deg);
 }
 @media screen and (min-width: 768px){
+    .calculadora__contenedorRespuesta{
+        width: 85%;
+    }
     /*Footer Media +768*/ 
     .footer__logo{
         width: calc(8em + 8vw);
@@ -407,7 +434,20 @@ footer div a:hover{
     }
     /*CIerra Footer Media +768*/
 }
+@media screen and (min-width: 920px){
+    .calculadora__contenedorRespuesta{
+        width: 82%;
+    }
+}
+@media screen and (min-width: 960px){
+    .calculadora__contenedorRespuesta{
+        width: 78%;
+    }
+}
 @media screen and (min-width: 1200px){
+    .calculadora__contenedorRespuesta{
+        width: 59%;
+    }
     /*Footer +1200*/
     .footer__redes img{
         width: calc(1.5em + 1.5vw);

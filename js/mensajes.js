@@ -58,3 +58,18 @@ mensajeErrorRegistrarse = () => Swal.fire({
         popup: 'animate__animated animate__fadeOutUp'
     }
 });
+mensajeErrorDatosInvalidos = () => Swal.fire({
+    icon: 'error',
+    title: 'Datos inválidos',
+    text: 'Coloca un dato válido',
+    imageUrl: '../assets/img/logos/LOGO Fabris Fernandez-01-recortado.png',
+    imageWidth: 300,
+    imageHeight: 100,
+    imageAlt: 'Logo Estudio Fabris - Fernández Lafi & Asoc.',
+    showClass: {
+        popup: 'animate__animated animate__fadeInDown'
+    },
+    hideClass: {
+        popup: 'animate__animated animate__fadeOutUp'
+    }
+});

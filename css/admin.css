@@ -131,8 +131,6 @@ main{
 .contenedor__login-register button:focus {
     color: #46a2fd;
 }
-
-
 .formulario__login{
     opacity: 1;
     display: block;
@@ -140,7 +138,6 @@ main{
 .formulario__register{
     display: none;
 }
-
 /*Resposive*/
 @media screen and (max-width: 850px) {
     main{

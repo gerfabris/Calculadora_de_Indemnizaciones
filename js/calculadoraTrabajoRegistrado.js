@@ -18,7 +18,7 @@ class DespidoTrabajoRegistrado {
         };
         calcDosCuarentayCinco(){
             this.dosCuarentayCinco = this.salario * this.antiguedad;
-            this.dosCuarentayCinco = this.dosCuarentayCinco.toFixed(2);
+            this.dosCuarentayCinco = +this.dosCuarentayCinco.toFixed(2);
             return this.dosCuarentayCinco;
         };
         calcParaAntiguedadParaPreaviso(){
@@ -30,17 +30,17 @@ class DespidoTrabajoRegistrado {
             }else if(this.preaviso == "no"){
                 this.antiguedadParaPreaviso = 0;
             };
-            this.antiguedadParaPreaviso = this.antiguedadParaPreaviso.toFixed(2);
+            this.antiguedadParaPreaviso = +this.antiguedadParaPreaviso.toFixed(2);
             return this.antiguedadParaPreaviso;
         };
         calcParaPreaviso(){
             this.preavisoTotal = this.antiguedadParaPreaviso * this.salario;
-            this.preavisoTotal = this.preavisoTotal.toFixed(2);
+            this.preavisoTotal = +this.preavisoTotal.toFixed(2);
             return this.preavisoTotal;
         };
         calcIntegracion(){
             this.integracion = (30 - this.diasTrabajados) * (this.salario/30);
-            this.integracion = this.integracion.toFixed(2);
+            this.integracion = +this.integracion.toFixed(2);
             return this.integracion;
         };
         calcTotalDespido(){
@@ -62,12 +62,32 @@ const obtenerInputs = document.querySelectorAll("#formularioTrabajoRegistrado in
 const obtenerSubmitTrabajoRegistrado = document.getElementById("submitTrabajoRegistrado");
 const validarCalculadoraTrabajoRegistrado = obtenerSubmitTrabajoRegistrado.addEventListener("click", (e) =>{
     e.preventDefault();
-    let validar = false;
-    let paraValidar = [];    
-    obtenerInputs.forEach((input) => {
-        input.value.length < 1 ? validar = false : validar = true + paraValidar.push(validar)
-    });
-    paraValidar.length == obtenerInputs.length ? ejecutarCalculadoraTrabajoRegistrado() : mensajeError(); //operador ternario
+    //valida datos lógicos de cada input
+    let datosLogicos = false;
+    validarDatosLogicos = () =>{
+        salario = document.getElementById("salario");
+        antiguedad = document.getElementById("antiguedad");
+        diasTrabajados = document.getElementById("diasTrabajados");
+        validadoSalario = false;
+        validadoAntiguedad = false;
+        validadoDiasTrabajados = false;
+        salario.value.length < 4 ? validadoSalario = false : validadoSalario = true;
+        antiguedad.value < 1 ? validadoAntiguedad = false : validadoAntiguedad = true;
+        diasTrabajados.value < 0 ? validadoDiasTrabajados = false : validadoDiasTrabajados = true;
+        diasTrabajados.value > 31 ? validadoDiasTrabajados = false : validadoDiasTrabajados = true;
+        validadoSalario && validadoAntiguedad && validadoDiasTrabajados ? datosLogicos = true : datosLogicos = false;
+    }
+    validarDatosLogicos();
+    //valida envío de formulario vacío
+    validarFormularioCompleto = () =>{
+        let validar = false;
+        let paraValidar = [];    
+        obtenerInputs.forEach((input) => {
+            input.value.length < 1 ? validar = false : validar = true + paraValidar.push(validar)
+        });
+        paraValidar.length == obtenerInputs.length ? ejecutarCalculadoraTrabajoRegistrado() : mensajeError(); //operador ternario
+    };
+    datosLogicos == true ? validarFormularioCompleto() : mensajeErrorDatosInvalidos();
 });
 const ejecutarCalculadoraTrabajoRegistrado = () => {
     obtenerByID ();
@@ -109,14 +129,15 @@ const ejecutarCalculadoraTrabajoRegistrado = () => {
     crearResultadoTrabajoRegistrado = () => {
         obtenerSectionMostrarResultadoTrabajoRegistrado.innerHTML = "";
         let divResultadoTrabajoRegistrado =  document.createElement("div");
-        divResultadoTrabajoRegistrado.classList = ("calculadora__contenedorRespuesta")
-        divResultadoTrabajoRegistrado.id = "contenedorRespuesta"
+        divResultadoTrabajoRegistrado.classList = ("calculadora__contenedorRespuesta");
+        divResultadoTrabajoRegistrado.id = "contenedorRespuesta";
         divResultadoTrabajoRegistrado.innerHTML = `<h3>Aquí tus resultados ${nuevoUsuarioTrabajoRegistrado.nombre}</h3>
-        <ul><li>Te corresponde una indemnización por despido de $ ${nuevoDespidoTrabajoRegistrado.totalDespido}.</li>
+        <ul><li>Te corresponde una indemnización por despido de $ <b> ${nuevoDespidoTrabajoRegistrado.totalDespido} </b>.</li>
         <li>La misma está compuesta por los siguientes rubros:</li>
-        <li>Indemnización por antigûedad: $ ${nuevoDespidoTrabajoRegistrado.dosCuarentayCinco}</li>
-        <li>Indemnización por falta de preaviso: $ ${nuevoDespidoTrabajoRegistrado.preavisoTotal}</li>
-        <li>Indemnización por integración mes de despido: $ ${nuevoDespidoTrabajoRegistrado.integracion}</li></ul>`
+        <li>- Indemnización por antigûedad: $ ${nuevoDespidoTrabajoRegistrado.dosCuarentayCinco}.</li>
+        <li>- Indemnización por falta de preaviso: $ ${nuevoDespidoTrabajoRegistrado.preavisoTotal}.</li>
+        <li>- Indemnización por integración mes de despido: $ ${nuevoDespidoTrabajoRegistrado.integracion}.</li></ul>
+        <button id="botonImprimir" class="boton__Imprimir">Imprimir</button>`;
         obtenerSectionMostrarResultadoTrabajoRegistrado.appendChild(divResultadoTrabajoRegistrado);  
     };
     crearResultadoTrabajoRegistrado();
@@ -124,6 +145,10 @@ const ejecutarCalculadoraTrabajoRegistrado = () => {
     obtenerCalculadoraContenedorRespuesta.scrollIntoView();
     obtenerCalculadoraContenedorRespuesta.scrollIntoView(true);
     obtenerCalculadoraContenedorRespuesta.scrollIntoView({behavior: "smooth"});
+    const botonImprimir = document.getElementById("botonImprimir");
+    const imprimirDocumento = botonImprimir.addEventListener("click", (e) =>{
+        window.print(e);
+    });
     unidos = {
         ...nuevoDespidoTrabajoRegistrado,
         ...nuevoUsuarioTrabajoRegistrado

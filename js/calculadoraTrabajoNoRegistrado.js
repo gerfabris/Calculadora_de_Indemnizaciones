@@ -22,7 +22,7 @@ class DespidoTrabajoNoRegistrado{
     };
     calcDosCuarentayCinco(){
         this.dosCuarentayCinco = this.salario * this.antiguedad;
-        this.dosCuarentayCinco = this.dosCuarentayCinco.toFixed(2);
+        this.dosCuarentayCinco = +this.dosCuarentayCinco.toFixed(2);
         return this.dosCuarentayCinco;
     };
     calcParaAntiguedadParaPreaviso(){
@@ -34,17 +34,17 @@ class DespidoTrabajoNoRegistrado{
         }else if(this.preaviso == "no"){
             this.antiguedadParaPreaviso = 0;
         };
-        this.antiguedadParaPreaviso = this.antiguedadParaPreaviso.toFixed(2);
+        this.antiguedadParaPreaviso = +this.antiguedadParaPreaviso.toFixed(2);
         return this.antiguedadParaPreaviso;
     };
     calcParaPreaviso(){
         this.preavisoTotal = this.antiguedadParaPreaviso * this.salario;
-        this.preavisoTotal = this.preavisoTotal.toFixed(2);
+        this.preavisoTotal = +this.preavisoTotal.toFixed(2);
         return this.preavisoTotal;
     };
     calcIntegracion(){
         this.integracion = (30 - this.diasTrabajados) * (this.salario/30);
-        this.integracion = this.integracion.toFixed(2);
+        this.integracion = +this.integracion.toFixed(2);
         return this.integracion;
     };
     calcTotalRubrosIndemnizatorios(){
@@ -60,27 +60,27 @@ class DespidoTrabajoNoRegistrado{
     };
     calcDiferenciasSalariales(){
         this.diferenciasSalariales = (this.salarioConvenio - this.salario) * this.antiguedadTope * 12;
-        this.diferenciasSalariales = this.diferenciasSalariales.toFixed(2);
+        this.diferenciasSalariales = +this.diferenciasSalariales.toFixed(2);
         return this.diferenciasSalariales;
     };
     calcMesesNoAbonados(){
         this.mesesNoAbonadosTotal = this.mesesNoAbonados * this.salarioConvenio;
-        this.mesesNoAbonadosTotal = this.mesesNoAbonadosTotal.toFixed(2);
+        this.mesesNoAbonadosTotal = +this.mesesNoAbonadosTotal.toFixed(2);
         return this.mesesNoAbonadosTotal;
     };
     calcSueldoAnualComplementario(){
         this.sueldoAnualComplementario = ((this.salario/2) /180) * this.diasTrabajadosAnual;
-        this.sueldoAnualComplementario = this.sueldoAnualComplementario.toFixed(2)
+        this.sueldoAnualComplementario = +this.sueldoAnualComplementario.toFixed(2);
         return this.sueldoAnualComplementario;
     };
     calcTotalRubrosNoRetenibles(){
         this.totalRubrosNoRetenibles = this.sueldoAnualComplementario + this.diferenciasSalariales + this.mesesNoAbonadosTotal;
-        this.totalRubrosNoRetenibles = this.totalRubrosNoRetenibles.toFixed(2);
+        this.totalRubrosNoRetenibles = +this.totalRubrosNoRetenibles.toFixed(2);
         return this.totalRubrosNoRetenibles;
     };
     calcTotalTrabajoNoRegistrado(){
         this.totalTrabajoNoRegistrado = this.totalRubrosIndemnizatorios + this.totalRubrosNoRetenibles;
-        this.totalTrabajoNoRegistrado = this.totalTrabajoNoRegistrado.toFixed(2);
+        this.totalTrabajoNoRegistrado = +this.totalTrabajoNoRegistrado.toFixed(2);
         return this.totalTrabajoNoRegistrado;
     };
     id(){
@@ -99,12 +99,42 @@ const obtenerInputs = document.querySelectorAll("#formularioTrabajoNoRegistrado 
 const obtenerSubmitTrabajoNoRegistrado = document.getElementById("submitTrabajoNoRegistrado");
 const validarCalculadoraTrabajoNoRegistrado = obtenerSubmitTrabajoNoRegistrado.addEventListener("click", (e) =>{
     e.preventDefault();
-    let validar = false;
-    let paraValidar = [];    
-    obtenerInputs.forEach((input) => {
-        input.value.length < 1 ? validar = false : validar = true + paraValidar.push(validar)
-    });
-    paraValidar.length == obtenerInputs.length ? ejecutarCalculadoraTrabajoNoRegistrado() : mensajeError(); //operador ternario
+    //valida datos lógicos de cada input
+    let datosLogicos = false;
+    validarDatosLogicos = () =>{
+        sueldoAnualComplementario = document.getElementById("sueldoAnualComplementario");
+        salario = document.getElementById("salario");
+        antiguedad = document.getElementById("antiguedad");
+        diasTrabajados = document.getElementById("diasTrabajados");
+        salarioConvenio = document.getElementById("salarioConvenio");
+        cantidadMesesNoAbonados = document.getElementById("cantidadMesesNoAbonados");
+        validadoSueldoAnualComplementario = false;
+        validadoSalario = false;
+        validadoAntiguedad = false;
+        validadoDiasTrabajados = false;
+        validarSalarioConvenio = false;
+        validarCantidadMesesNoAbonados = false;
+        sueldoAnualComplementario.value < 0 ? validadoSueldoAnualComplementario = false : validadoSueldoAnualComplementario = true;
+        sueldoAnualComplementario.value > 365 ? validadoSueldoAnualComplementario = false : validadoSueldoAnualComplementario = true;
+        salario.value.length < 4 ? validadoSalario = false : validadoSalario = true;
+        antiguedad.value < 1 ? validadoAntiguedad = false : validadoAntiguedad = true;
+        diasTrabajados.value < 0 ? validadoDiasTrabajados = false : validadoDiasTrabajados = true;
+        diasTrabajados.value > 31 ? validadoDiasTrabajados = false : validadoDiasTrabajados = true;
+        salarioConvenio.length < 4 ? validarSalarioConvenio = false : validarSalarioConvenio = true;
+        cantidadMesesNoAbonados.value < 0 ? validarCantidadMesesNoAbonados = false : validarCantidadMesesNoAbonados = true;
+        validadoSueldoAnualComplementario && validadoSalario && validadoAntiguedad && validadoDiasTrabajados && validarSalarioConvenio && validarCantidadMesesNoAbonados? datosLogicos = true : datosLogicos = false;
+    }
+    validarDatosLogicos();
+    //validar formulario completo
+    validarFormularioCompleto = () =>{
+        let validar = false;
+        let paraValidar = [];    
+        obtenerInputs.forEach((input) => {
+            input.value.length < 1 ? validar = false : validar = true + paraValidar.push(validar)
+        });
+        paraValidar.length == obtenerInputs.length ? ejecutarCalculadoraTrabajoNoRegistrado() : mensajeError(); //operador ternario    
+    }; 
+    datosLogicos == true ? validarFormularioCompleto() : mensajeErrorDatosInvalidos();
 });
 const ejecutarCalculadoraTrabajoNoRegistrado = () => {
     obtenerByID ();
@@ -159,18 +189,19 @@ const ejecutarCalculadoraTrabajoNoRegistrado = () => {
         divResultadoTrabajoNoRegistrado.id = ("contenedorRespuesta");
         divResultadoTrabajoNoRegistrado.classList = ("calculadora__contenedorRespuesta")
         divResultadoTrabajoNoRegistrado.innerHTML = `<h3>Aquí tus resultados ${nuevoUsuarioTrabajoNoRegistrado.nombre}</h3>
-        <ul><li>Te corresponde una indemnización por despido de $ ${nuevoDespidoTrabajoNoRegistrado.totalRubrosIndemnizatorios}.</li>
+        <ul><li>Te corresponde una indemnización por despido de $ <b> ${nuevoDespidoTrabajoNoRegistrado.totalRubrosIndemnizatorios}</b>.</li>
         <li>La misma está compuesta por los siguientes rubros:</li>
-        <li>Indemnización por antigûedad: $ ${nuevoDespidoTrabajoNoRegistrado.dosCuarentayCinco}.</li>
-        <li>Indemnización por falta de preaviso: $ ${nuevoDespidoTrabajoNoRegistrado.preavisoTotal}.</li>
-        <li>Indemnización por integración mes de despido: $ ${nuevoDespidoTrabajoNoRegistrado.integracion}.</li>
-        <li>Te corresponde además en concepto de indemnización por rubros no retenibles de $ ${nuevoDespidoTrabajoNoRegistrado.totalRubrosNoRetenibles}</li>
+        <li>- Indemnización por antigûedad: $ ${nuevoDespidoTrabajoNoRegistrado.dosCuarentayCinco}.</li>
+        <li>- Indemnización por falta de preaviso: $ ${nuevoDespidoTrabajoNoRegistrado.preavisoTotal}.</li>
+        <li>- Indemnización por integración mes de despido: $ ${nuevoDespidoTrabajoNoRegistrado.integracion}.</li>
+        <li>Te corresponde además en concepto de indemnización por rubros no retenibles de $ <b>${nuevoDespidoTrabajoNoRegistrado.totalRubrosNoRetenibles}</b>.</li>
         <li>La misma está compuesta por los siguientes rubros:</li>
-        <li>Diferencias salariales: $ ${nuevoDespidoTrabajoNoRegistrado.diferenciasSalariales}</li>
-        <li>Sueldo Anual Complementario: $ ${nuevoDespidoTrabajoNoRegistrado.sueldoAnualComplementario}</li>
-        <li>Meses trabajados y no percibidos: $ ${nuevoDespidoTrabajoNoRegistrado.mesesNoAbonadosTotal}</li></ul>
-        <p>En total, tu indemnización es de $ ${nuevoDespidoTrabajoNoRegistrado.totalMostrar}</p>`;
-        obtenerSectionMostrarResultadoTrabajoNoRegistrado.appendChild(divResultadoTrabajoNoRegistrado);   
+        <li>- Diferencias salariales: $ ${nuevoDespidoTrabajoNoRegistrado.diferenciasSalariales}.</li>
+        <li>- Sueldo Anual Complementario: $ ${nuevoDespidoTrabajoNoRegistrado.sueldoAnualComplementario}.</li>
+        <li>- Meses trabajados y no percibidos: $ ${nuevoDespidoTrabajoNoRegistrado.mesesNoAbonadosTotal}.</li></ul>
+        <p>En total, tu indemnización es de $ <b>${nuevoDespidoTrabajoNoRegistrado.totalMostrar}</b>.</p>
+        <button id="botonImprimir" class="boton__Imprimir">Imprimir</button>`;
+        obtenerSectionMostrarResultadoTrabajoNoRegistrado.appendChild(divResultadoTrabajoNoRegistrado);
     };
     crearResultadoTrabajoNoRegistrado();
     const obtenerCalculadoraContenedorRespuesta = document.getElementById("contenedorRespuesta");
@@ -178,6 +209,10 @@ const ejecutarCalculadoraTrabajoNoRegistrado = () => {
     obtenerCalculadoraContenedorRespuesta.scrollIntoView();
     obtenerCalculadoraContenedorRespuesta.scrollIntoView(true);
     obtenerCalculadoraContenedorRespuesta.scrollIntoView({behavior: "smooth"});
+    const botonImprimir = document.getElementById("botonImprimir");
+    const imprimirDocumento = botonImprimir.addEventListener("click", (e) =>{
+        window.print(e);
+    });
     //utilización de spread para crear usuario con todos los datos
     unidos = {
         ...nuevoDespidoTrabajoNoRegistrado,
