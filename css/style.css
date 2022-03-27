@@ -382,6 +382,13 @@ header nav div div ul a:hover {
     flex-direction: row;
     flex-wrap: wrap;
 }
+.contenedor__RespuestaMostrarOrdenar{
+    display: flex;
+    align-items: baseline;
+    flex-direction: column;
+    width: 100%;
+
+}
 /* Footer */
 footer{
     background-color: #cdb8e0;

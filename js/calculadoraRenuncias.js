@@ -88,16 +88,10 @@ const validarCalculadoraRenuncia = obtenerSubmitRenuncias.addEventListener("clic
         salario = document.getElementById("salario");
         antiguedad = document.getElementById("antiguedad");
         diasTrabajados = document.getElementById("diasTrabajados");
-        validadoSueldoAnualComplementario = false;
-        validadoSalario = false;
-        validadoAntiguedad = false;
-        validadoDiasTrabajados = false;
-        sueldoAnualComplementario.value < 0 ? validadoSueldoAnualComplementario = false : validadoSueldoAnualComplementario = true;
-        sueldoAnualComplementario.value > 365 ? validadoSueldoAnualComplementario = false : validadoSueldoAnualComplementario = true;
-        salario.value.length < 4 ? validadoSalario = false : validadoSalario = true;
-        antiguedad.value < 1 ? validadoAntiguedad = false : validadoAntiguedad = true;
-        diasTrabajados.value < 0 ? validadoDiasTrabajados = false : validadoDiasTrabajados = true;
-        diasTrabajados.value > 31 ? validadoDiasTrabajados = false : validadoDiasTrabajados = true;
+        validadoSueldoAnualComplementario = sueldoAnualComplementario.value < 0 ? false : sueldoAnualComplementario.value > 365 ? false : true;
+        validadoSalario = salario.value.length < 4 ? false : salario.value < 1000 ? false : true;
+        validadoAntiguedad = antiguedad.value < 1 ? false : true;
+        validadoDiasTrabajados = diasTrabajados.value < 0 ? false : diasTrabajados.value > 31 ? false : true;
         validadoSueldoAnualComplementario && validadoSalario && validadoAntiguedad && validadoDiasTrabajados ? datosLogicos = true : datosLogicos = false;
     }
     validarDatosLogicos();
@@ -119,10 +113,10 @@ const ejecutarCalculadoraRenuncias = () => {
     obtenerByID ();
     //Obtención de los datos personales
     const nuevoUsuarioRenuncia = new Usuario(
-        obtenerNombres,
-        obtenerApellidos,
-        obtenerEmail,
-        obtenerTrabajo,
+        obtenerNombres.toUpperCase(),
+        obtenerApellidos.toUpperCase(),
+        obtenerEmail.toUpperCase(),
+        obtenerTrabajo.toUpperCase(),
     );
     //Crea id usuario
     nuevoUsuarioRenuncia.idUsuarios();
@@ -181,10 +175,7 @@ const ejecutarCalculadoraRenuncias = () => {
     obtenerCalculadoraContenedorRespuesta.scrollIntoView();
     obtenerCalculadoraContenedorRespuesta.scrollIntoView(true);
     obtenerCalculadoraContenedorRespuesta.scrollIntoView({behavior: "smooth"});
-    const botonImprimir = document.getElementById("botonImprimir");
-    const imprimirDocumento = botonImprimir.addEventListener("click", (e) =>{
-        window.print(e);
-    });
+    imprimirDocumento();
     //utilización de spread para crear usuario con todos los datos
     unidos = {
         ...nuevaRenuncia,

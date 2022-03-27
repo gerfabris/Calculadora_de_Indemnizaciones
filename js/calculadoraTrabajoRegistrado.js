@@ -68,13 +68,9 @@ const validarCalculadoraTrabajoRegistrado = obtenerSubmitTrabajoRegistrado.addEv
         salario = document.getElementById("salario");
         antiguedad = document.getElementById("antiguedad");
         diasTrabajados = document.getElementById("diasTrabajados");
-        validadoSalario = false;
-        validadoAntiguedad = false;
-        validadoDiasTrabajados = false;
-        salario.value.length < 4 ? validadoSalario = false : validadoSalario = true;
-        antiguedad.value < 1 ? validadoAntiguedad = false : validadoAntiguedad = true;
-        diasTrabajados.value < 0 ? validadoDiasTrabajados = false : validadoDiasTrabajados = true;
-        diasTrabajados.value > 31 ? validadoDiasTrabajados = false : validadoDiasTrabajados = true;
+        validadoSalario = salario.value.length < 4 ? false : salario.value < 1000 ? false : true;
+        validadoAntiguedad = antiguedad.value < 1 ? false : true;
+        validadoDiasTrabajados = diasTrabajados.value < 0 ? false : diasTrabajados.value > 31 ? false : true;
         validadoSalario && validadoAntiguedad && validadoDiasTrabajados ? datosLogicos = true : datosLogicos = false;
     }
     validarDatosLogicos();
@@ -92,10 +88,10 @@ const validarCalculadoraTrabajoRegistrado = obtenerSubmitTrabajoRegistrado.addEv
 const ejecutarCalculadoraTrabajoRegistrado = () => {
     obtenerByID ();
     const nuevoUsuarioTrabajoRegistrado = new Usuario(
-        obtenerNombres,
-        obtenerApellidos,
-        obtenerEmail,
-        obtenerTrabajo,
+        obtenerNombres.toUpperCase(),
+        obtenerApellidos.toUpperCase(),
+        obtenerEmail.toUpperCase(),
+        obtenerTrabajo.toUpperCase(),
     );
     nuevoUsuarioTrabajoRegistrado.idUsuarios();
     const agregarUsuariosTrabajoRegistrados = () =>{
@@ -145,10 +141,7 @@ const ejecutarCalculadoraTrabajoRegistrado = () => {
     obtenerCalculadoraContenedorRespuesta.scrollIntoView();
     obtenerCalculadoraContenedorRespuesta.scrollIntoView(true);
     obtenerCalculadoraContenedorRespuesta.scrollIntoView({behavior: "smooth"});
-    const botonImprimir = document.getElementById("botonImprimir");
-    const imprimirDocumento = botonImprimir.addEventListener("click", (e) =>{
-        window.print(e);
-    });
+    imprimirDocumento();
     unidos = {
         ...nuevoDespidoTrabajoRegistrado,
         ...nuevoUsuarioTrabajoRegistrado

@@ -108,20 +108,12 @@ const validarCalculadoraTrabajoNoRegistrado = obtenerSubmitTrabajoNoRegistrado.a
         diasTrabajados = document.getElementById("diasTrabajados");
         salarioConvenio = document.getElementById("salarioConvenio");
         cantidadMesesNoAbonados = document.getElementById("cantidadMesesNoAbonados");
-        validadoSueldoAnualComplementario = false;
-        validadoSalario = false;
-        validadoAntiguedad = false;
-        validadoDiasTrabajados = false;
-        validarSalarioConvenio = false;
-        validarCantidadMesesNoAbonados = false;
-        sueldoAnualComplementario.value < 0 ? validadoSueldoAnualComplementario = false : validadoSueldoAnualComplementario = true;
-        sueldoAnualComplementario.value > 365 ? validadoSueldoAnualComplementario = false : validadoSueldoAnualComplementario = true;
-        salario.value.length < 4 ? validadoSalario = false : validadoSalario = true;
-        antiguedad.value < 1 ? validadoAntiguedad = false : validadoAntiguedad = true;
-        diasTrabajados.value < 0 ? validadoDiasTrabajados = false : validadoDiasTrabajados = true;
-        diasTrabajados.value > 31 ? validadoDiasTrabajados = false : validadoDiasTrabajados = true;
-        salarioConvenio.length < 4 ? validarSalarioConvenio = false : validarSalarioConvenio = true;
-        cantidadMesesNoAbonados.value < 0 ? validarCantidadMesesNoAbonados = false : validarCantidadMesesNoAbonados = true;
+        validadoSueldoAnualComplementario = sueldoAnualComplementario.value < 0 ? false : sueldoAnualComplementario.value > 365 ? false : true;
+        validadoSalario = salario.value.length < 4 ? false : salario.value < 1000 ? false : true;
+        validadoAntiguedad = antiguedad.value < 1 ? false : true;
+        validadoDiasTrabajados = diasTrabajados.value < 0 ? false : diasTrabajados.value > 31 ? false : true;
+        validarSalarioConvenio = salarioConvenio.value.length < 4 ? false : salarioConvenio.value < 1000 ? false : true;
+        validarCantidadMesesNoAbonados = cantidadMesesNoAbonados.value < 0 ? false : true;
         validadoSueldoAnualComplementario && validadoSalario && validadoAntiguedad && validadoDiasTrabajados && validarSalarioConvenio && validarCantidadMesesNoAbonados? datosLogicos = true : datosLogicos = false;
     }
     validarDatosLogicos();
@@ -139,10 +131,10 @@ const validarCalculadoraTrabajoNoRegistrado = obtenerSubmitTrabajoNoRegistrado.a
 const ejecutarCalculadoraTrabajoNoRegistrado = () => {
     obtenerByID ();
     const nuevoUsuarioTrabajoNoRegistrado = new Usuario(
-        obtenerNombres,
-        obtenerApellidos,
-        obtenerEmail,
-        obtenerTrabajo,
+        obtenerNombres.toUpperCase(),
+        obtenerApellidos.toUpperCase(),
+        obtenerEmail.toUpperCase(),
+        obtenerTrabajo.toUpperCase(),
     );
     nuevoUsuarioTrabajoNoRegistrado.idUsuario();
     let agregarUsuariosTrabajoNoRegistrados = () =>{
@@ -205,14 +197,11 @@ const ejecutarCalculadoraTrabajoNoRegistrado = () => {
     };
     crearResultadoTrabajoNoRegistrado();
     const obtenerCalculadoraContenedorRespuesta = document.getElementById("contenedorRespuesta");
-    //Para hacer que al mostrar el resultado creado baje hasta el mismo    
+    //Para hacer que, al mostrar el resultado creado, baje el usuario hasta el mismo    
     obtenerCalculadoraContenedorRespuesta.scrollIntoView();
     obtenerCalculadoraContenedorRespuesta.scrollIntoView(true);
     obtenerCalculadoraContenedorRespuesta.scrollIntoView({behavior: "smooth"});
-    const botonImprimir = document.getElementById("botonImprimir");
-    const imprimirDocumento = botonImprimir.addEventListener("click", (e) =>{
-        window.print(e);
-    });
+    imprimirDocumento();
     //utilización de spread para crear usuario con todos los datos
     unidos = {
         ...nuevoDespidoTrabajoNoRegistrado,
