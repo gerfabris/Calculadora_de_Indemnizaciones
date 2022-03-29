@@ -35,7 +35,7 @@ const validarRegister = (e) => {
 formularioRegister.addEventListener("submit", (e)=>{
     e.preventDefault();
     validarRegister(e);
-    registerValido == true ? agregarDato(obtenerNombreRegister,e,0) + agregarDato(obtenerUsuarioRegister,e,1) + agregarDato(obtenerEmailRegister,e,2) + agregarDato(obtenerContrasenaRegister,e,3) : console.log("sinRE");
+    registerValido == true ? agregarDato(obtenerNombreRegister,e,0) + agregarDato(obtenerUsuarioRegister,e,1) + agregarDato(obtenerEmailRegister,e,2) + agregarDato(obtenerContrasenaRegister,e,3) : mensajeErrorDatosIncompletos();
 });
 //funciones login
 let loginValido;
@@ -79,7 +79,7 @@ let coincidirLoginRegister = () =>{
 formularioLogin.addEventListener ("submit", (e) => {
     e.preventDefault();
     validarLogin(e);
-    loginValido == true ? agregarDato(obtenerEmailLogin,e,0) + agregarDato(obtenerContrasenaLogin,e,1) + enviarLoginJSON() : console.log("sinLo");
+    loginValido == true ? agregarDato(obtenerEmailLogin,e,0) + agregarDato(obtenerContrasenaLogin,e,1) + enviarLoginJSON() : mensajeErrorDatosIncompletos();
     coincidirLoginRegister()
 });
 enviarLoginAlLocalStorage = () =>{
@@ -100,7 +100,7 @@ enviarLoginJSON = () =>{
         },
     })
     .then((response) => response.json())
-    .then((data) => console.log(data))
+    .then((data) => localStorage.setItem("mailNoRegistrado", JSON.stringify(data)))
 };
 redireccionar = () =>{
     mensajeIngresoValido();

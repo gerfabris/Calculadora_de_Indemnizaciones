@@ -96,7 +96,7 @@ header nav div div ul a:hover {
 .index__sectionTitulos__h2{
     color: #112535;
     font-weight: bold;
-    margin-top: 1em;
+    margin-top: .5em;
     margin-bottom: 1em;
     text-align: center;
 }
@@ -154,19 +154,19 @@ header nav div div ul a:hover {
 .calculadora__sectionTitulos__h1{
     color: #112535;
     font-weight: bold;
-    margin-top: 1em;
-    margin-bottom: 1em;
+    margin-top: .5em;
+    margin-bottom: .5em;
     text-align: center;
-    padding: 1em;
+    padding: .5em;
     width: 90%;
 }
 .calculadora__sectionTitulos__h2{
     color: #112535;
     font-weight: bold;
-    margin-top: 1em;
+    margin-top: .5em;
     margin-bottom: 2em;
     text-align: center;
-    padding: 1em;
+    padding: .5em;
 }
 .calculadora__sectionFormulario{
     display: flex;
